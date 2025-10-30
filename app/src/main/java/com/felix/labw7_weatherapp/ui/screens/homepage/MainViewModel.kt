@@ -84,7 +84,7 @@ class MainViewModel @Inject constructor(
 
         val iconCode = response.weather.firstOrNull()?.icon
         val iconUrl = if (iconCode.isNullOrBlank()) {
-            "" // Or a default placeholder URL
+            ""
         } else {
             "https://openweathermap.org/img/wn/$iconCode@2x.png"
         }
