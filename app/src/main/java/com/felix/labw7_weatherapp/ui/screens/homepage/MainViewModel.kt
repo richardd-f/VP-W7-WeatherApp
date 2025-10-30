@@ -33,7 +33,7 @@ class MainViewModel @Inject constructor(
         _searchValue.value = query
     }
 
-    // 4. Implement the fetch logic
+    // Implement the fetch logic
     fun onClickSearchButton() {
         // Don't search if the query is blank
         if (_searchValue.value.isBlank()) {
@@ -65,7 +65,7 @@ class MainViewModel @Inject constructor(
         }
     }
 
-    // 5. Add a helper function to map API data to UI data
+    // Add a helper function to map API data to UI data
     private fun mapResponseToWeatherData(response: WeatherApiResponse): WeatherData {
         val pandaImage = if (response.weather.firstOrNull()?.main == "Rain") {
             R.drawable.panda_kehujanan
