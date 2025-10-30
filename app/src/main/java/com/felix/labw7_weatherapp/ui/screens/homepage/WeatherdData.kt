@@ -5,7 +5,7 @@ data class WeatherData(
     val date: String,
     val updatedTime: String,
 
-    val weatherImgRes: Int,
+    val weatherIconUrl: String,
     val weatherStatus: String,
     val temp: String,
     val pandaImgRes: Int,

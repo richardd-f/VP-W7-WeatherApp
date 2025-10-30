@@ -37,6 +37,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import coil.compose.AsyncImage
 import com.felix.labw7_weatherapp.R
 import com.felix.labw7_weatherapp.ui.screens.homepage.components.SunTimeItem
 import com.felix.labw7_weatherapp.ui.screens.homepage.components.WeatherDetailItem
@@ -47,15 +48,16 @@ fun Homepage(
 ){
     HomepageContent(
         query = viewModel.searchValue.collectAsState().value,
+        onSearchValueChange = {viewModel.onSearchValueChange(it)},
         onClickSearchButton = {viewModel.onClickSearchButton()},
-        weatherUiState = viewModel.weatherUiState.collectAsState().value
+        weatherUiState = viewModel.weatherUiState.collectAsState().value,
     )
 }
 
 @Composable
 fun HomepageContent(
-    query: String = "",
-    onSearchValueChange: (String) -> Unit = {},
+    query: String,
+    onSearchValueChange: (String) -> Unit,
     onClickSearchButton: ()->Unit,
     weatherUiState: WeatherUiState,
     
@@ -214,10 +216,10 @@ fun HomepageContent(
                                 verticalArrangement = Arrangement.Center,
                                 modifier = Modifier.weight(1f) // Takes half the width
                             ) {
-                                Image(
-                                    painter = painterResource(weatherUiState.data.weatherImgRes),
+                                AsyncImage(
+                                    model = weatherUiState.data.weatherIconUrl,
                                     contentDescription = "Weather Icon",
-                                    modifier = Modifier.size(70.dp)
+                                    modifier = Modifier.size(70.dp),
                                 )
                                 Text(
                                     text = weatherUiState.data.weatherStatus,
