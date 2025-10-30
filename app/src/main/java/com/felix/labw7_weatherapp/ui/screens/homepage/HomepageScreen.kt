@@ -33,6 +33,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -349,7 +350,7 @@ fun HomepageContent(
                 }
             }
 
-            // If Ui state is Not Found
+            // If Ui state is Error
             else if(weatherUiState is WeatherUiState.Error){
                 Box(
                     modifier = Modifier
@@ -384,7 +385,8 @@ fun HomepageContent(
                         Text(
                             text = weatherUiState.message,
                             color = Color.White.copy(alpha = 0.7f),
-                            fontSize = 16.sp
+                            fontSize = 16.sp,
+                            textAlign = TextAlign.Center
                         )
                     }
                 }

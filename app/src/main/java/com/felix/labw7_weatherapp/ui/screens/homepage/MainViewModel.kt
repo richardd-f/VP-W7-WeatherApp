@@ -100,9 +100,9 @@ class MainViewModel @Inject constructor(
             humidity = "${response.main.humidity}%",
             wind = "${response.wind.speed.toInt()} m/s",
             feelsTemp = "${kelvinToCelsius(response.main.feelsLike).toInt()}°",
-            rainFall = "${response.rain?.volume ?: "-"}",
+            rainFall = response.rain?.volume?.let { "$it mm" } ?: "0.0 mm",
             pressure = "${response.main.pressure} hPa",
-            cloudsPercentage = "${response.clouds?.cloudiness ?: "-"}",
+            cloudsPercentage = response.clouds?.cloudiness?.let{"$it %"} ?: "0 %",
             sunriseTime = formatTime(response.system.sunriseTime),
             sunsetTime = formatTime(response.system.sunsetTime)
         )

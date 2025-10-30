@@ -9,7 +9,7 @@ data class WeatherApiResponse(
     @SerializedName("wind") val wind: WindDetails,
     @SerializedName("sys") val system: SystemDetails,
     @SerializedName("name") val city: String,
-    @SerializedName("cloud") val clouds: CloudsDetails?= null,
+    @SerializedName("clouds") val clouds: CloudsDetails?= null,
     @SerializedName("rain") val rain: RainVolume? = null
 )
 
