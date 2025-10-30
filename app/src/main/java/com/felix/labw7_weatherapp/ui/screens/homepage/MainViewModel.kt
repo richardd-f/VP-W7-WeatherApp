@@ -36,12 +36,16 @@ class MainViewModel: ViewModel() {
     )
     ))
 
-    // Public Imutable state
+    // Public Immutable state
     val searchValue: StateFlow<String> = _searchValue.asStateFlow()
     val weatherUiState: StateFlow<WeatherUiState> = _weatherUiState.asStateFlow()
 
     // Event
     fun onSearchValueChange(query:String){
         _searchValue.value = query
+    }
+    fun onClickSearchButton(){
+        _weatherUiState.value = WeatherUiState.Loading
+
     }
 }

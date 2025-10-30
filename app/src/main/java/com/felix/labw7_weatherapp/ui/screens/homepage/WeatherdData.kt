@@ -1,26 +1,24 @@
 package com.felix.labw7_weatherapp.ui.screens.homepage
 
-import com.felix.labw7_weatherapp.R
-
 data class WeatherData(
-    val location: String = "Loading...",
-    val date: String = "...",
-    val updatedTime: String = "...",
+    val location: String,
+    val date: String,
+    val updatedTime: String,
 
-    val weatherImgRes: Int = R.drawable.cloud,
-    val weatherStatus: String = "...",
-    val temp: String = "--°C",
-    val pandaImgRes: Int = R.drawable.panda_kehujanan,
+    val weatherImgRes: Int,
+    val weatherStatus: String,
+    val temp: String,
+    val pandaImgRes: Int,
 
-    val humidity: String = "--%",
-    val wind: String = "--km/h",
-    val feelsTemp: String = "--°",
-    val rainFall: String = "-- mm",
-    val pressure: String = "-- hPa",
-    val cloudsPercentage: String = "--%",
+    val humidity: String,
+    val wind: String,
+    val feelsTemp: String,
+    val rainFall: String,
+    val pressure: String,
+    val cloudsPercentage: String,
 
-    val sunriseTime: String = "--:-- AM",
-    val sunsetTime: String = "--:-- PM"
+    val sunriseTime: String,
+    val sunsetTime: String
 )
 
 // This sealed interface will represent screen's state

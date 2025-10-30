@@ -1,14 +1,12 @@
 package com.felix.labw7_weatherapp.ui.screens.homepage
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -40,6 +38,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.felix.labw7_weatherapp.R
+import com.felix.labw7_weatherapp.ui.screens.homepage.components.SunTimeItem
+import com.felix.labw7_weatherapp.ui.screens.homepage.components.WeatherDetailItem
 
 @Composable
 fun Homepage(
@@ -47,56 +47,17 @@ fun Homepage(
 ){
     HomepageContent(
         query = viewModel.searchValue.collectAsState().value,
-        onSearch = { viewModel.onSearchValueChange(it) },
-
-        weatherUiState = viewModel.weatherUiState.collectAsState().value,
-
-        location = "Denpasar",
-        date = "September 24",
-        updatedTime = "Updated as of 10:00 AM",
-        weatherImgRes = R.drawable.cloud,
-        weatherStatus = "Cloudy",
-        temp = "31 C",
-        pandaImgRes = R.drawable.panda_kehujanan,
-        humidity = "49%",
-        wind = "2km/h",
-        feelsTemp = "32",
-        rainFall = "0.0 mm",
-        pressure = "1011 hPa",
-        cloudsPercentage = "8%",
-        sunriseTime = "06:00 AM",
-        sunsetTime = "07:00 PM",
+        onClickSearchButton = {viewModel.onClickSearchButton()},
+        weatherUiState = viewModel.weatherUiState.collectAsState().value
     )
 }
 
 @Composable
 fun HomepageContent(
     query: String = "",
-    onSearch: (String) -> Unit = {},
+    onSearchValueChange: (String) -> Unit = {},
+    onClickSearchButton: ()->Unit,
     weatherUiState: WeatherUiState,
-
-    // Location, Date, Updated Time
-    location: String,
-    date: String,
-    updatedTime: String,
-
-    // Weather Logo, Temp, Panda
-    weatherImgRes: Int,
-    weatherStatus: String,
-    temp: String,
-    pandaImgRes: Int,
-
-    // Detail Information
-    humidity: String,
-    wind: String,
-    feelsTemp: String,
-    rainFall: String,
-    pressure: String,
-    cloudsPercentage: String,
-
-    // Sunrise, sunset
-    sunriseTime: String,
-    sunsetTime: String,
     
 ){
     Box(
@@ -132,7 +93,7 @@ fun HomepageContent(
                 // TextField
                 OutlinedTextField(
                     value = query,
-                    onValueChange = { onSearch(it) },
+                    onValueChange = { onSearchValueChange(it) },
                     placeholder = { Text("Enter city name...") },
                     singleLine = true,
                     leadingIcon = {
@@ -167,7 +128,7 @@ fun HomepageContent(
 
                 // Button
                 Button(
-                    onClick = { onSearch(query) },
+                    onClick = { onClickSearchButton() },
                     colors = ButtonDefaults.buttonColors(
                         containerColor = Color.White.copy(alpha = 0.08f),
                         contentColor = Color.White,
@@ -455,7 +416,6 @@ fun HomepageContent(
                 }
             }
 
-
         }
     }
 }
@@ -464,82 +424,4 @@ fun HomepageContent(
 @Composable
 fun PreviewHomepage(){
     Homepage()
-}
-
-@Composable
-private fun WeatherDetailItem(
-    imageRes: Int,
-    label: String,
-    value: String,
-    modifier: Modifier = Modifier
-) {
-    Column(
-        modifier = modifier
-            .aspectRatio(1f)
-            .background(
-                color = Color.Black.copy(alpha = 0.25f),
-                shape = RoundedCornerShape(16.dp)
-            )
-            .padding(16.dp),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
-    ) {
-        Image(
-            painter = painterResource(id = imageRes),
-            contentDescription = label,
-            modifier = Modifier.size(24.dp)
-        )
-
-        Spacer(modifier = Modifier.height(8.dp))
-        Text(
-            text = label,
-            color = Color.White.copy(alpha = 0.7f),
-            fontSize = 12.sp,
-            fontWeight = FontWeight.Medium
-        )
-        Spacer(modifier = Modifier.height(4.dp))
-        Text(
-            text = value,
-            color = Color.White,
-            fontSize = 18.sp,
-            fontWeight = FontWeight.Bold
-        )
-    }
-}
-
-@Composable
-private fun SunTimeItem(
-    imageRes: Int,
-    label: String,
-    time: String,
-    modifier: Modifier = Modifier
-) {
-    Column(
-        modifier = modifier,
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        Image(
-            painter = painterResource(id = imageRes),
-            contentDescription = label,
-            modifier = Modifier.size(40.dp)
-        )
-
-        Spacer(modifier = Modifier.height(4.dp))
-
-        Text(
-            text = label,
-            color = Color.White.copy(alpha = 0.7f),
-            fontSize = 12.sp,
-            fontWeight = FontWeight.Medium
-        )
-
-        Spacer(modifier = Modifier.height(4.dp))
-
-        Text(
-            text = time,
-            color = Color.White,
-            fontSize = 16.sp,
-            fontWeight = FontWeight.Bold
-        )
-    }
 }
